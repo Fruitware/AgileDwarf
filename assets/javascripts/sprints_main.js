@@ -348,6 +348,7 @@
 
             obj.update = function ()
             {
+                console.log('updated');
                 var times = '';
                 for (var owner in data)
                 {
@@ -356,6 +357,10 @@
                     times += '<div class="sprint_time">' + owner + ': ' + data[owner] + '</div>';
                 }
                 sprint.element.children('.time_list').html(times);
+                var totalTime = parseInt(sprint.element.children('.total_time_list').text());
+                if (!totalTime) totalTime = 0;
+                totalTime += parseInt(data[owner]);
+                sprint.element.children('.total_time_list').text(totalTime);
                 return obj;
             };
 
