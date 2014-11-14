@@ -356,11 +356,6 @@
                     times += '<div class="sprint_time">' + owner + ': ' + data[owner] + '</div>';
                 }
                 sprint.element.children('.time_list').html(times);
-                var totalTime = parseInt(sprint.element.children('.total_time_list').text());
-                console.lol(totalTime);
-                if (!totalTime) totalTime = 0;
-                totalTime += parseInt(data[owner]);
-                sprint.element.children('.total_time_list').text(totalTime);
                 return obj;
             };
 
@@ -376,6 +371,25 @@
             sprint.times.addTask(task);
         });
         this.times.update();
+
+        var $taskLists = $('.task_list');
+        if ($taskLists.length) {
+            for (var i = 0, len = $taskLists.length; i < len; i++) {
+                var $taskList = $taskLists.eq(i);
+                var totalTime = 0;
+                var $taskItems = $taskList.find('.task_estimate');
+                if ($taskItems.length) {
+                    console.log('yey!');
+                    for (var j = 0, lenj = $taskItems.length; j < lenj; j++) {
+                        var t = parseFloat($taskItems.eq(j).text());
+                        if (t) totalTime += t;
+                    }
+                    if (totalTime) {
+                        $taskList.siblings('.total_time_list').text('Total Estimated time: ' + totalTime + 'h');
+                    }
+                }
+            }
+        }
 
         // "create task" button
         $('.add_task', el).on('click', function ()
