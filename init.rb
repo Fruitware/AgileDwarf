@@ -22,7 +22,7 @@ Redmine::Plugin.register :AgileDwarf do
 
   project_module :scrum do
     permission :sprints, {:adsprints => [:list], :adtaskinl => [:update, :inplace, :create, :tooltip], :adsprintinl => [:create, :inplace]}
-    permission :sprints_tasks, {:adtasks => [:list], :adtaskinl => [:update, :inplace, :tooltip, :spent]}
+    permission :sprints_tasks, {:adtasks => [:list], :adtaskinl => [:update, :inplace, :tooltip, :spent, :create], :adsprintinl => [:create, :inplace]}
     permission :burndown_charts, {:adburndown => [:show]}
   end
 
